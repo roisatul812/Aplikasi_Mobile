@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/dashboard_provider.dart';
+import 'package:praktikum_mobile_1/features/dosen/presentation/pages/dosen_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -18,20 +19,36 @@ class DashboardPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+
+            /// CARD MAHASISWA
             dashboardCard(
               icon: Icons.school,
               title: "Mahasiswa",
               total: dashboard.totalMahasiswa,
               color: Colors.blue,
             ),
+
             const SizedBox(height: 16),
+
+            /// CARD DOSEN
             dashboardCard(
               icon: Icons.person,
               title: "Dosen",
               total: dashboard.totalDosen,
               color: Colors.green,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const DosenPage(),
+                  ),
+                );
+              },
             ),
+
             const SizedBox(height: 16),
+
+            /// CARD MATA KULIAH
             dashboardCard(
               icon: Icons.menu_book,
               title: "Mata Kuliah",
@@ -44,11 +61,13 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
+  /// WIDGET CARD DASHBOARD
   Widget dashboardCard({
     required IconData icon,
     required String title,
     required int total,
     required Color color,
+    VoidCallback? onTap,
   }) {
     return Card(
       elevation: 3,
@@ -56,6 +75,7 @@ class DashboardPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: ListTile(
+        onTap: onTap,
         leading: CircleAvatar(
           backgroundColor: color.withOpacity(0.2),
           child: Icon(icon, color: color),

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'pages/dashboard_page.dart';
-import 'providers/dashboard_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart' as provider;
+
+import 'package:praktikum_mobile_1/features/dashboard/dashboard_provider.dart';
+import 'package:praktikum_mobile_1/features/dashboard/dashboard_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(
+      child: provider.ChangeNotifierProvider(
+        create: (_) => DashboardProvider(),
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,14 +21,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return ChangeNotifierProvider(
-      create: (_) => DashboardProvider(),
-
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: const DashboardPage(),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DashboardPage(),
     );
   }
 }
