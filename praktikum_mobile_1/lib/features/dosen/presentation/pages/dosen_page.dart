@@ -8,7 +8,6 @@ class DosenPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final dosenAsync = ref.watch(dosenProvider);
 
     return Scaffold(
@@ -21,7 +20,16 @@ class DosenPage extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             itemCount: dosenList.length,
             itemBuilder: (context, index) {
-              return DosenCard(dosen: dosenList[index]);
+              final colors = [
+                [Color(0xFF56CCF2), Color(0xFF2F80ED)],
+                [Color(0xFFFF758C), Color(0xFFFF7EB3)],
+                [Color(0xFF36D1DC), Color(0xFF5B86E5)],
+              ];
+
+              return DosenCard(
+                dosen: dosenList[index],
+                gradientColors: colors[index % colors.length],
+              );
             },
           );
         },

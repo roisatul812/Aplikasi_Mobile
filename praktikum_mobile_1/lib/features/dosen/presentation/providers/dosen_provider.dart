@@ -10,5 +10,5 @@ final dosenProvider =
 
   final repo = ref.read(dosenRepositoryProvider);
 
-  return repo.getDosen();
+  return repo.getDosenList();
 });

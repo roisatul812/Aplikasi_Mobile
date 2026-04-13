@@ -1,11 +1,13 @@
 class Dosen {
   final String nama;
-  final String nidn;
-  final String bidang;
+  final String nip;
+  final String email;
+  final String jurusan;
 
   Dosen({
     required this.nama,
-    required this.nidn,
-    required this.bidang,
+    required this.nip,
+    required this.email,
+    required this.jurusan,
   });
 }
