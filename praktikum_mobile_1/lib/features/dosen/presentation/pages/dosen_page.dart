@@ -21,9 +21,11 @@ class DosenPage extends ConsumerWidget {
             itemCount: dosenList.length,
             itemBuilder: (context, index) {
               final colors = [
-                [Color(0xFF56CCF2), Color(0xFF2F80ED)],
-                [Color(0xFFFF758C), Color(0xFFFF7EB3)],
-                [Color(0xFF36D1DC), Color(0xFF5B86E5)],
+                [Colors.blue, const Color.fromARGB(255, 74, 161, 212)],
+                [const Color.fromARGB(255, 244, 80, 135), const Color.fromARGB(255, 251, 146, 197)],
+                [const Color.fromARGB(255, 168, 179, 85), const Color.fromARGB(255, 245, 240, 152)],
+                [Colors.green, Colors.teal],
+                [const Color.fromARGB(255, 117, 134, 228), const Color.fromARGB(255, 132, 196, 228)],
               ];
 
               return DosenCard(

@@ -2,95 +2,120 @@ import 'package:flutter/material.dart';
 import '../../data/models/dosen_model.dart';
 
 class DosenCard extends StatelessWidget {
-  final Dosen dosen;
-  final List<Color> gradientColors;
+
+  final DosenModel dosen;
+  final List<Color>? gradientColors;
 
   const DosenCard({
     super.key,
     required this.dosen,
-    required this.gradientColors,
+    this.gradientColors,
   });
 
   @override
   Widget build(BuildContext context) {
 
-    final firstLetter = dosen.nama[0];
+    final colors = gradientColors ??
+        [
+          Colors.blue,
+          Colors.purple
+        ];
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: gradientColors,
+          colors: [
+            colors[0].withOpacity(0.15),
+            colors[1].withOpacity(0.15)
+          ],
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: colors[0].withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0,4),
+          )
+        ],
       ),
-      child: Row(
-        children: [
 
-          /// AVATAR HURUF
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                firstLetter,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+
+        child: Row(
+          children: [
+
+            /// AVATAR
+            Container(
+              width: 55,
+              height: 55,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: colors,
                 ),
+                borderRadius: BorderRadius.circular(16),
               ),
-            ),
-          ),
-
-          const SizedBox(width: 16),
-
-          /// DATA DOSEN
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-                Text(
-                  dosen.nama,
+              child: Center(
+                child: Text(
+                  dosen.name.substring(0,1),
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 22,
                   ),
                 ),
-
-                const SizedBox(height: 4),
-
-                Text(
-                  "NIP: ${dosen.nip}",
-                  style: const TextStyle(color: Colors.white70),
-                ),
-
-                Text(
-                  dosen.email,
-                  style: const TextStyle(color: Colors.white70),
-                ),
-
-                Text(
-                  dosen.jurusan,
-                  style: const TextStyle(color: Colors.white70),
-                ),
-              ],
+              ),
             ),
-          ),
 
-          const Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
-            size: 18,
-          ),
-        ],
+            const SizedBox(width: 14),
+
+            /// DATA DOSEN
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Text(
+                    dosen.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  Text("@${dosen.username}"),
+
+                  Text(dosen.email),
+
+                  Text(
+                    "${dosen.address.street}, ${dosen.address.city}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+
+                ],
+              ),
+            ),
+
+            /// ARROW
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: colors[0].withOpacity(0.15),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+                color: colors[0],
+              ),
+            ),
+
+          ],
+        ),
       ),
     );
   }
